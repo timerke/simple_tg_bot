@@ -26,7 +26,8 @@ class Bot:
                       "general_questions": "Общие вопросы",
                       "adviсe": "Советы и рекомендации",
                       "glossary": "Глоссарий"}
-        self._menu_items: Dict[str, MenuItem] = {item_name: MenuItem(item_name, item_title) for item_name, item_title in menu_items.items()}
+        self._menu_items: Dict[str, MenuItem] = {item_name: MenuItem(item_name, item_title)
+                                                 for item_name, item_title in menu_items.items()}
 
     @staticmethod
     def _get_employee_id(message) -> int:
@@ -43,10 +44,10 @@ class Bot:
 
         if message.from_user.first_name is not None:
             return message.from_user.first_name
-        
+
         if message.from_user.username is not None:
             return message.from_user.username
-        
+
         return message.from_user.id
 
     @staticmethod
@@ -124,7 +125,7 @@ class Bot:
                 self._bot.send_message(message.chat.id, f"В прошлый раз Вы остановились на '{last_menu_name}'")
                 self._show_main_menu_item(message, menu_item)
                 return
-        
+
         self._show_main_menu(message)
 
     def run(self) -> None:

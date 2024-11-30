@@ -27,9 +27,9 @@ class MenuItem:
 
         if self._text is None:
             return "Нет данных"
-        
+
         return self._text
-    
+
     @property
     def title(self) -> str:
         """
@@ -43,7 +43,7 @@ class MenuItem:
         file_path = os.path.join(root_path, "data", f"{self._name}.txt")
         if os.path.exists(file_path):
             self._text = self._read_file(file_path)
-    
+
     @staticmethod
     def _read_file(file_path: str) -> str:
         """

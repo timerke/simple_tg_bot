@@ -14,7 +14,7 @@ def connect_and_disconnect_database(func: Callable[..., Any]):
         result = func(self, conn, *args, **kwargs)
         conn.close()
         return result
-    
+
     return wrapper
 
 
@@ -71,7 +71,7 @@ class Database:
         cursor = conn.cursor()
         cursor.execute("INSERT INTO employees VALUES (?, ?)", (employee_id, username))
         conn.commit()
-    
+
     @connect_and_disconnect_database
     def check_employee(self, conn, employee_id: int) -> bool:
         """
@@ -83,7 +83,7 @@ class Database:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM employees WHERE id = ?", (employee_id,))
         return bool(cursor.fetchall())
-    
+
     @connect_and_disconnect_database
     def get_last_menu_item_name(self, conn, employee_id: int) -> Optional[str]:
         """
@@ -95,7 +95,7 @@ class Database:
         cursor = conn.cursor()
         cursor.execute("SELECT last_menu FROM history WHERE employee_id = ?", (employee_id,))
         result = cursor.fetchall()
-        return result[0][0] if result else None            
+        return result[0][0] if result else None
 
     @connect_and_disconnect_database
     def save_employee_history(self, conn, employee_id: int, menu_item_name: str) -> bool:
