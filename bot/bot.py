@@ -37,7 +37,8 @@ class Bot:
 
         return message.from_user.id
 
-    def _get_employee_name(self, message) -> str:
+    @staticmethod
+    def _get_employee_name(message) -> str:
         """
         :return: the name of the employee by which to greet him.
         """
@@ -60,8 +61,8 @@ class Bot:
 
     def _get_menu_item(self, menu_title: str) -> Optional[MenuItem]:
         """
-        :param menu_title:
-        :return:
+        :param menu_title: menu item name.
+        :return: menu item with given name.
         """
 
         for menu_item in self._menu_items.values():
@@ -103,7 +104,7 @@ class Bot:
 
     def _show_main_menu_item(self, message, menu_item: MenuItem):
         """
-        :param menu_item:
+        :param menu_item: the item from the main menu that needs to be shown.
         """
 
         employee_id = self._get_employee_id(message)

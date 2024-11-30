@@ -29,7 +29,8 @@ class Database:
         if not self._check_database_created():
             self._create_tables()
 
-    def _check_database_created(self) -> bool:
+    @staticmethod
+    def _check_database_created() -> bool:
         """
         :return: True if the database has been created.
         """
@@ -98,7 +99,7 @@ class Database:
         return result[0][0] if result else None
 
     @connect_and_disconnect_database
-    def save_employee_history(self, conn, employee_id: int, menu_item_name: str) -> bool:
+    def save_employee_history(self, conn, employee_id: int, menu_item_name: str) -> None:
         """
         :param conn: database connection;
         :param employee_id: employee ID in Telegram;
