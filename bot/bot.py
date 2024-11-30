@@ -21,7 +21,11 @@ class Bot:
 
     def _create_main_menu_items(self) -> None:
         menu_items = {"company_info": "О компании",
-                      "offices": "Офисы",
+                      "company_info_a": "О компании А",
+                      "company_info_b": "О компании Б",
+                      "offices": "Офисы компании",
+                      "check_list": "Чек-лист",
+                      "digital_transformation": "Цифровая трансформация",
                       "health": "Здоровье",
                       "general_questions": "Общие вопросы",
                       "adviсe": "Советы и рекомендации",
@@ -90,7 +94,7 @@ class Bot:
 
     def _register_message_handlers(self) -> None:
         self._bot.register_message_handler(self._start_executor, commands=["start"])
-        self._bot.register_message_handler(self._show_main_menu, regexp="Главное меню")
+        self._bot.register_message_handler(self._show_main_menu, regexp="(Главное меню|Назад)")
         self._bot.register_message_handler(self._handle_unknown_command, func=lambda msg: True)
 
     def _show_main_menu(self, message):
@@ -111,6 +115,7 @@ class Bot:
         self._database.save_employee_history(employee_id, menu_item.title)
 
         markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+        markup.add(telebot.types.KeyboardButton("Назад"))
         markup.add(telebot.types.KeyboardButton("Главное меню"))
         self._bot.send_message(message.chat.id, menu_item.text, reply_markup=markup)
 
