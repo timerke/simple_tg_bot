@@ -24,4 +24,7 @@
    venv\Scripts\python run.py
    ```
 
-   
+
+## Примечание
+
+Бот тестировался на *Windows 10* с *Python 3.8.10*.
