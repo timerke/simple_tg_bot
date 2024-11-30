@@ -118,6 +118,8 @@ class Bot:
         markup.add(telebot.types.KeyboardButton("Назад"))
         markup.add(telebot.types.KeyboardButton("Главное меню"))
         self._bot.send_message(message.chat.id, menu_item.text, reply_markup=markup)
+        if menu_item.image is not None:
+            self._bot.send_photo(message.chat.id, menu_item.image)
 
     def _start_executor(self, message):
         self._greet_employee(message)
